@@ -11,6 +11,9 @@ class LoginViewController: UIViewController {
   
   @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
+  
+  let userLogin = "User"
+  let userPassword = "1234"
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,7 +24,7 @@ class LoginViewController: UIViewController {
     
     guard let welcomeVC = segue.destination as? WelcomeViewController else { return }
     
-    if loginTextField.text == "User" && passwordTextField.text == "1234" {
+    if loginTextField.text == userLogin && passwordTextField.text == userPassword {
       
       welcomeVC.welcomeValue = loginTextField.text
       
