@@ -12,12 +12,11 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   
-  let userLogin = "User"
-  let userPassword = "1234"
+  private let userLogin = "User"
+  private let userPassword = "1234"
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -30,9 +29,17 @@ class LoginViewController: UIViewController {
       
     } else {
       
+      loginTextField.text = ""
+      passwordTextField.text = ""
+      
       showAlert(alertText: "Someting is wrong", alertMessage: "Login or password is not correct")
       
     }
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    view.endEditing(true)
   }
   
   @IBAction func unwind(segue: UIStoryboardSegue) {
@@ -47,12 +54,7 @@ class LoginViewController: UIViewController {
   @IBAction func forgotPasswordButtonPressed() {
     showAlert(alertText: "You forgot password?", alertMessage: "Password is 1234")
   }
-  
-  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesBegan(touches, with: event)
-    self.view.endEditing(true)
-  }
-  
+    
 }
 
 
@@ -62,8 +64,8 @@ extension UIViewController {
         let alert = UIAlertController(title: alertText,
                                       message: alertMessage,
                                       preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertAction.Style.default, handler: nil))
-    self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertAction.Style.default))
+    self.present(alert, animated: true)
     }
 }
 
