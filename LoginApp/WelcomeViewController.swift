@@ -11,12 +11,12 @@ class WelcomeViewController: UIViewController {
 
   @IBOutlet weak var welcomeLabel: UILabel!
   
-  var welcomeValue: String!
+  var welcomeValue = ""
   
   override func viewDidLoad() {
         super.viewDidLoad()
     
-    welcomeLabel.text = "Welcome, \(welcomeValue ?? "")!"
+    welcomeLabel.text = "Welcome, \(welcomeValue)!"
     
     }
   

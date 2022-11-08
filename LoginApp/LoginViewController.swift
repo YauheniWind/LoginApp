@@ -15,31 +15,28 @@ class LoginViewController: UIViewController {
   private let userLogin = "User"
   private let userPassword = "1234"
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
     guard let welcomeVC = segue.destination as? WelcomeViewController else { return }
-    
-    if loginTextField.text == userLogin && passwordTextField.text == userPassword {
-      
-      welcomeVC.welcomeValue = loginTextField.text
-      
-    } else {
-      
-      loginTextField.text = ""
-      passwordTextField.text = ""
-      
-      showAlert(alertText: "Someting is wrong", alertMessage: "Login or password is not correct")
-      
-    }
+    welcomeVC.welcomeValue = userLogin
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     super.touchesBegan(touches, with: event)
     view.endEditing(true)
+  }
+  
+  @IBAction func logInButtonPressed() {
+    
+    guard loginTextField.text == userLogin && passwordTextField.text == userPassword else {
+      
+      loginTextField.text = ""
+      passwordTextField.text = ""
+      
+      showAlert(alertText: "Someting is wrong", alertMessage: "Login or password is not correct")
+      return
+    }
+    
+    performSegue(withIdentifier: "openWelcomeVC", sender: nil)
   }
   
   @IBAction func unwind(segue: UIStoryboardSegue) {
@@ -48,11 +45,11 @@ class LoginViewController: UIViewController {
   }
 
   @IBAction func forgotUserNameButtonPressed() {
-    showAlert(alertText: "Ah you forgot login?", alertMessage: "Login is User")
+    showAlert(alertText: "Ah you forgot login?", alertMessage: "Login is \(userLogin)")
   }
   
   @IBAction func forgotPasswordButtonPressed() {
-    showAlert(alertText: "You forgot password?", alertMessage: "Password is 1234")
+    showAlert(alertText: "You forgot password?", alertMessage: "Password is \(userPassword)")
   }
     
 }
