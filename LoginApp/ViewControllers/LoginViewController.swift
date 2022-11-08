@@ -12,12 +12,18 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   
-  private let userLogin = "User"
-  private let userPassword = "1234"
+  private let userLogin = User.information().userLogin
+  private let userPassword = User.information().userPassword
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let welcomeVC = segue.destination as? WelcomeViewController else { return }
-    welcomeVC.welcomeValue = userLogin
+    guard let tabBarVC = segue.destination as? UITabBarController else { return }
+    guard let viewControllers = tabBarVC.viewControllers else { return }
+    
+    for viewController in viewControllers {
+      if let welcomeVC = viewController as? WelcomeViewController {
+        welcomeVC.welcomeValue = loginTextField.text ?? ""
+      }
+    }
   }
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -29,7 +35,6 @@ class LoginViewController: UIViewController {
     
     guard loginTextField.text == userLogin && passwordTextField.text == userPassword else {
       
-      loginTextField.text = ""
       passwordTextField.text = ""
       
       showAlert(alertText: "Someting is wrong", alertMessage: "Login or password is not correct")
@@ -62,7 +67,7 @@ extension UIViewController {
                                       message: alertMessage,
                                       preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Got it", style: UIAlertAction.Style.default))
-    self.present(alert, animated: true)
+        present(alert, animated: true)
     }
 }
 
