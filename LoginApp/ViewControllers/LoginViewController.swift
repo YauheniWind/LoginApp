@@ -12,9 +12,8 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var loginTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   
-  private let userLogin = User.information().userLogin
-  private let userPassword = User.information().userPassword
-
+  private let user = User.getInformation()
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let tabBarVC = segue.destination as? UITabBarController else { return }
     guard let viewControllers = tabBarVC.viewControllers else { return }
@@ -22,6 +21,17 @@ class LoginViewController: UIViewController {
     for viewController in viewControllers {
       if let welcomeVC = viewController as? WelcomeViewController {
         welcomeVC.welcomeValue = loginTextField.text ?? ""
+      } else if let aboutVC = viewController as? AboutMeViewController {
+        
+        aboutVC.about = user.information.bio
+        
+      } else if let mainInfo = viewController as? MainInformationsViewController {
+        
+        mainInfo.mainName = user.information.name
+        mainInfo.surname = user.information.surname
+        mainInfo.age = String(user.information.age)
+        mainInfo.employment = user.information.employment
+        
       }
     }
   }
@@ -33,7 +43,7 @@ class LoginViewController: UIViewController {
   
   @IBAction func logInButtonPressed() {
     
-    guard loginTextField.text == userLogin && passwordTextField.text == userPassword else {
+    guard loginTextField.text == user.login && passwordTextField.text == user.password else {
       
       passwordTextField.text = ""
       
@@ -48,26 +58,26 @@ class LoginViewController: UIViewController {
     loginTextField.text = ""
     passwordTextField.text = ""
   }
-
+  
   @IBAction func forgotUserNameButtonPressed() {
-    showAlert(alertText: "Ah you forgot login?", alertMessage: "Login is \(userLogin)")
+    showAlert(alertText: "Ah you forgot login?", alertMessage: "Login is \(user.login)")
   }
   
   @IBAction func forgotPasswordButtonPressed() {
-    showAlert(alertText: "You forgot password?", alertMessage: "Password is \(userPassword)")
+    showAlert(alertText: "You forgot password?", alertMessage: "Password is \(user.password)")
   }
-    
+  
 }
 
 
 extension UIViewController {
-// Show a basic alert
-    func showAlert(alertText: String, alertMessage: String) {
-        let alert = UIAlertController(title: alertText,
-                                      message: alertMessage,
-                                      preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Got it", style: UIAlertAction.Style.default))
-        present(alert, animated: true)
-    }
+  // Show a basic alert
+  func showAlert(alertText: String, alertMessage: String) {
+    let alert = UIAlertController(title: alertText,
+                                  message: alertMessage,
+                                  preferredStyle: UIAlertController.Style.alert)
+    alert.addAction(UIAlertAction(title: "Got it", style: UIAlertAction.Style.default))
+    present(alert, animated: true)
+  }
 }
 

@@ -6,30 +6,30 @@
 //
 
 struct User {
-  let userLogin: String
-  let userPassword: String
-  let userInformation: UserInfromation
+  let login: String
+  let password: String
+  let information: Person
 }
 
-struct UserInfromation {
-  let userName: String
-  let userSurname: String
-  let userAge: Int
-  let userEmployment: String
-  let userBio: String
+struct Person {
+  let name: String
+  let surname: String
+  let age: Int
+  let employment: String
+  let bio: String
 }
+
 // UsersSecurity
 extension User {
-  static func information() -> User {
-    let security = User(userLogin: "Eugene",
-                             userPassword: "1234",
-                             userInformation:
-                              UserInfromation(userName: "Eugene",
-                                              userSurname: "Gravdin",
-                                              userAge: 24,
-                                              userEmployment: "Bartender",
-                                              userBio: "I was born in South Kazakhstan but I graduated from high school in Belarus and university in Slovakia"))
+  static func getInformation() -> User {
+    return User(login: "Eugene",
+                password: "1234",
+                information:
+                  Person(name: "Eugene",
+                         surname: "Gravdin",
+                         age: 24,
+                         employment: "Bartender",
+                         bio: "I was born in South Kazakhstan but I graduated from high school in Belarus and university in Slovakia"))
     
-    return security
   }
 }

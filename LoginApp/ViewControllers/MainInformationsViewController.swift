@@ -8,7 +8,7 @@
 import UIKit
 
 class MainInformationsViewController: UIViewController {
-
+  
   @IBOutlet weak var mainNameLabel: UILabel!
   
   @IBOutlet weak var photoImageView: UIImageView!
@@ -19,19 +19,24 @@ class MainInformationsViewController: UIViewController {
   @IBOutlet weak var ageLabel: UILabel!
   @IBOutlet weak var employmentLabel: UILabel!
   
-  private let user = User.information().userInformation
+  var mainName = ""
+  var surname = ""
+  var age = ""
+  var employment = ""
+  
   
   override func viewDidLoad() {
-        super.viewDidLoad()
+    super.viewDidLoad()
     photoImageView.layer.cornerRadius = photoImageView.frame.width / 2
     photoImageView.layer.borderWidth = 8
     photoImageView.layer.borderColor = UIColor.purple.cgColor
     
-    mainNameLabel.text = user.userName
-    nameLabel.text = user.userName
-    surnameLabel.text = user.userSurname
-    ageLabel.text = String(user.userAge)
-    employmentLabel.text = user.userEmployment
-    }
+    mainNameLabel.text = mainName
+    nameLabel.text = mainName
+    surnameLabel.text = surname
+    ageLabel.text = age
+    employmentLabel.text = employment
     
+  }
+  
 }

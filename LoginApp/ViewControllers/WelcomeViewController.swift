@@ -8,15 +8,15 @@
 import UIKit
 
 class WelcomeViewController: UIViewController {
-
+  
   @IBOutlet weak var welcomeLabel: UILabel!
   
   var welcomeValue = ""
   
   override func viewDidLoad() {
-        super.viewDidLoad()
+    super.viewDidLoad()
     welcomeLabel.text = "Welcome, \(welcomeValue)!"
     
-    }
+  }
   
 }

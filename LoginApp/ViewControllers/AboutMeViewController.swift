@@ -8,14 +8,14 @@
 import UIKit
 
 class AboutMeViewController: UIViewController {
-
+  
   @IBOutlet weak var informationTextView: UITextView!
   
-  private let user = User.information().userInformation
+  var about = ""
+  
   override func viewDidLoad() {
-        super.viewDidLoad()
-
-    informationTextView.text = user.userBio
-    }
-    
+    super.viewDidLoad()
+    informationTextView.text = about
+  }
+  
 }
