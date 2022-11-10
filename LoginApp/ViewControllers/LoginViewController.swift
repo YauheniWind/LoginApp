@@ -23,14 +23,11 @@ class LoginViewController: UIViewController {
         welcomeVC.welcomeValue = loginTextField.text ?? ""
       } else if let aboutVC = viewController as? AboutMeViewController {
         
-        aboutVC.about = user.information.bio
+        aboutVC.user = user
         
       } else if let mainInfo = viewController as? MainInformationsViewController {
-        
-        mainInfo.mainName = user.information.name
-        mainInfo.surname = user.information.surname
-        mainInfo.age = String(user.information.age)
-        mainInfo.employment = user.information.employment
+  
+        mainInfo.user = user
         
       }
     }

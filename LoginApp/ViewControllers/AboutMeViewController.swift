@@ -11,11 +11,11 @@ class AboutMeViewController: UIViewController {
   
   @IBOutlet weak var informationTextView: UITextView!
   
-  var about = ""
+  var user: User!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    informationTextView.text = about
+    informationTextView.text = user.information.bio
   }
   
 }
